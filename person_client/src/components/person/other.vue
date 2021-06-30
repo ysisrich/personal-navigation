@@ -89,6 +89,17 @@ export default {
 	},
 	mounted() {
 		this.getPersonInfo()
+		
+		let width = document.documentElement.clientWidth
+		// console.log(width)
+		if(width < 1200){
+			this.width = '350px'
+		}else if(width>=1200 && width<1800){
+			this.width = '30%'
+		}else{
+			this.width = '510px'
+		}
+		
 		window.addEventListener('resize',()=>{
 			let width = document.documentElement.clientWidth
 			// console.log(width)
