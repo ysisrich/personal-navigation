@@ -3,7 +3,6 @@ import './plugins/axios'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-// import './plugins/element.js'
 import './plugins/ant-design-vue.js'
 
 import Viewer from 'v-viewer'

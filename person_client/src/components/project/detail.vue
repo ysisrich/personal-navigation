@@ -27,7 +27,7 @@
 						{{form.detail}}
 					</div>
 					<div style="text-align: center;margin-top: 20px;">
-						<a-tag v-for="(i,index) in defaultTags" :color="tag_colors[Math.ceil(Math.random()*7) - 1]">
+						<a-tag v-for="(i,index) in defaultTags" :color="tag_colors[Math.ceil(Math.random()*7) - 1]" :key="index">
 							{{i}}
 						</a-tag>
 					</div>
