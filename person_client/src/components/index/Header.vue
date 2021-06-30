@@ -22,7 +22,7 @@
 			  </div>
 		</a-layout-header>
 		
-		<div v-show="show" class="ant-xs-style">
+		<!-- <div v-show="show" class="ant-xs-style">
 			<Search style="float: left;"/>
 			<a-tooltip placement="bottomRight" class="ant-xs-publish" @click="publish">
 			  <template slot="title">
@@ -30,11 +30,12 @@
 			  </template>
 			  <a-icon type="edit" style="margin: 5px;"/> 发布
 			</a-tooltip>
-		</div>
+		</div> -->
 		
 		<!-- 小屏 侧边弹框 -->
 		<a-drawer
 		      placement="left"
+			  width="50%"
 		      :closable="false"
 		      :visible="visible"
 		      :after-visible-change="afterVisibleChange"

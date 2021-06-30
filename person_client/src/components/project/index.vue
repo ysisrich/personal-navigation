@@ -27,6 +27,11 @@
 		<div style="text-align: right;margin-right: 10px; padding-bottom: 10px;" v-show="showData && projectList.length > 0">
 			<a-pagination :default-current="1" :defaultPageSize="9" :total="total" @change="pagesChange"/>
 		</div>
+		
+		<!-- 发布 -->
+		<div v-show="showBtn" class="ant-position-publish" @click="publish">
+			<a-icon type="plus" />
+		</div>
 
 	</div>
 
@@ -51,7 +56,8 @@
 				},
 				total:0,
 				showData:false,
-				searchData:false
+				searchData:false,
+				showBtn:false
 			}
 		},
 		components: {
@@ -63,6 +69,12 @@
 				this.searchData = true
 				this.form.search = value
 				this.getProjectList()
+			})
+			
+			document.documentElement.clientWidth < 768 ? this.showBtn = true : this.showBtn = false
+			window.addEventListener('resize',()=>{
+				let width = document.documentElement.clientWidth
+				width < 768 ? this.showBtn = true : this.showBtn = false
 			})
 		},
 		methods: {
@@ -97,6 +109,10 @@
 						console.log(err)
 					})
 			},
+			// 发布项目
+			publish(){
+				this.$router.push('/publish')
+			},
 			
 			// 分页
 			pagesChange(page,pagesize){
@@ -117,5 +133,20 @@
   margin-bottom: 20px;
   padding: 30px 50px;
   margin: 20px 0;
+}
+
+
+.ant-position-publish{
+	position: fixed;
+	right: 30px;
+	bottom: 40px;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	border-radius: 25px;
+	text-align: center;
+	box-shadow: 0px 0px 9px rgba(0,0,0,.4);
+	background-color: #1890FF;
+	color: #FFFFFF;
 }
 </style>

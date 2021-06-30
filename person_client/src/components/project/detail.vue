@@ -39,7 +39,7 @@
 							<template slot="title" >
 							  <span >{{copy_title}}</span>
 							</template>
-							<a-icon :type="copy_type" :style="{color:'#1890ff',cursor:'pointer' }" @click="handleCopy(form.url,$event)"/>
+							<a-icon :type="copy_type" :style="{color:'#1890ff',cursor:'pointer' }" @click="handleCopy(form.url)"/>
 						</a-tooltip>
 						
 					</div>
@@ -57,6 +57,29 @@
 					<div style="margin-bottom: 20px;">
 						<span >时间：</span><span>{{form.create_time}}</span>
 					</div>
+					
+					<template slot="actions" class="ant-card-actions">
+						<a-tooltip placement="top"  @click="like">
+							<template slot="title">
+								<span>点赞</span>
+							</template>
+							<a-icon type="like" :style="{margin:'0 5px'}"/>点赞
+						</a-tooltip>
+					
+						<a-tooltip placement="top" @click="share">
+							<template slot="title">
+								<span>分享</span>
+							</template>
+							<a-icon type="share-alt" :style="{margin:'0 5px'}"/>分享
+						</a-tooltip>
+					
+						<a-tooltip placement="top" @click="deleteProject">
+							<template slot="title">
+								<span>删除</span>
+							</template>
+							<a-icon type="delete" :style="{margin:'0 5px'}"/>删除
+						</a-tooltip>
+					</template>
 					
 				</a-card>
 				<a-card v-else>
@@ -185,7 +208,7 @@
 				window.open(this.form.url)
 			},
 			// 复制链接
-			handleCopy(text, event) {
+			handleCopy(text) {
 				var _input = document.createElement("input");   // 直接构建input
 				    _input.value = text;  // 设置内容
 				    document.body.appendChild(_input);    // 添加临时实例
@@ -197,6 +220,20 @@
 			},
 			toGitUrl(){
 				window.open(this.form.git_url)
+			},
+			// like
+			like(){
+				this.$message.success('感谢点赞！')
+			},
+			share(){
+				let text = `我在个人导航发现了『 ${this.form.name} 』 快来看看 http://www.yangsong.cool/#/detail?id=${this.form.id}`
+				this.handleCopy(text)
+				this.$message.success('链接已复制，感谢分享！')
+			},
+			// 删除项目
+			deleteProject(){
+				console.log(this.form.id)
+				this.$message.error('禁止删除')
 			}
 		}
 
@@ -226,7 +263,9 @@
 		display: inline-block;
 		vertical-align: bottom;
 	}
-	
+	.ant-tag{
+		margin: 5px;
+	}
 	.ant-avatar-hover:hover .mask {
 		position: absolute;
 		display: inline-block;

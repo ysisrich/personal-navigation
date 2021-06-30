@@ -1,6 +1,6 @@
 <template>
 	<div class="ant-add-project">
-		<div style="width: 60%;margin: 0 20px; padding:30px 20px;">
+		<div :style="{width: width,margin: '0 20px',padding:'30px 20px'}">
 			<a-form-model ref="ruleForm" :model="form" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol"
 				labelAlign="left">
 				<a-form-model-item ref="name" label="名称" prop="name">
@@ -146,6 +146,8 @@
 				tags:[],
 				tagList: ['PHP', 'Vue', 'Html', 'Css', 'MySQL', 'MongoDB', 'Redis', 'Nginx', 'Apache', '小程序', 'H5', 'APP'],
 				url: this.config.interfaceUrl + '/project/uploadProjectImg',
+				width:'60%',
+				
 				id:this.$route.query.id,
 				previewVisible: false,
 				previewImage: '',
@@ -213,6 +215,12 @@
 		},
 		mounted() {
 			this.getProjectOne(this.$route.query.id)
+			
+			document.documentElement.clientWidth < 768 ? this.width = '90%' : this.width = '60%'
+			window.addEventListener('resize',()=>{
+				let width = document.documentElement.clientWidth
+				width < 768 ? this.width = '90%' : this.width = '60%'
+			})
 		},
 		methods: {
 			// 根据id获取项目信息

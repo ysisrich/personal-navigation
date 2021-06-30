@@ -102,6 +102,9 @@
 		margin-top: 30px;
 		margin-bottom: 10px;
 		text-align: right;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 	.ant-carousel{
 		width: 300px;
