@@ -25,6 +25,7 @@ import {
     Menu,
     Modal,
     Pagination,
+	Popconfirm,
     Radio,
     Row,
     Select,
@@ -55,6 +56,7 @@ Vue.use(Layout);
 Vue.use(Menu);
 Vue.use(Modal);
 Vue.use(Pagination);
+Vue.use(Popconfirm);
 Vue.use(Radio);
 Vue.use(Row);
 Vue.use(Select);

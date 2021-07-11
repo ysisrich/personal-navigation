@@ -83,7 +83,7 @@ export default {
 			visible: false,
 			confirmLoading: false,
 			value:'',
-			width:'30%',
+			width:'40%',
 			loading:true
 		}
 	},
@@ -93,9 +93,9 @@ export default {
 		let width = document.documentElement.clientWidth
 		// console.log(width)
 		if(width < 1200){
-			this.width = '350px'
+			this.width = '450px'
 		}else if(width>=1200 && width<1800){
-			this.width = '30%'
+			this.width = '40%'
 		}else{
 			this.width = '510px'
 		}
@@ -104,9 +104,9 @@ export default {
 			let width = document.documentElement.clientWidth
 			// console.log(width)
 			if(width < 1200){
-				this.width = '350px'
+				this.width = '450px'
 			}else if(width>=1200 && width<1800){
-				this.width = '30%'
+				this.width = '40%'
 			}else{
 				this.width = '510px'
 			}
