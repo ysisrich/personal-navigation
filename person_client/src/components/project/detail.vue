@@ -2,7 +2,10 @@
 	<div>
 		<a-row>
 			<a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="16" style="padding: 0 10px;">
-				<a-card v-if="form.name" style="width: 100%;margin-bottom:40px; " :bodyStyle="{'padding':'24px'}">
+				<a-card v-if="form.name" style="width: 100%;margin-bottom:40px; overflow: hidden;" :bodyStyle="{'padding':'24px'}">
+				<div class="ant-tag-card" v-if="form.category == 1">个人</div>
+				<div class="ant-tag-card" v-if="form.category == 2">团队</div>
+				<div class="ant-tag-card" v-if="form.category == 3">其他</div>
 					<div >
 						<a-button type="link" style="padding: 0;" @click="back">
 							<a-icon type="left" /> 返回
@@ -134,7 +137,7 @@
 			// 根据id获取项目信息
 			getProjectOne(id) {
 				this.axios.get(`project/${id}`).then(res => {
-					// console.log(res)
+					console.log(res)
 					if (res.status == 1) {
 						this.form = res.data
 						let arr = res.data.tag.split(',')
@@ -226,7 +229,7 @@
 				this.$message.success('感谢点赞！')
 			},
 			share(){
-				let text = `我在个人导航发现了『 ${this.form.name} 』 快来看看 http://www.yangsong.cool/#/detail?id=${this.form.id}`
+				let text = `我在个人导航发现了『 ${this.form.name} 』 快来看看 ${this.config.onLineUrl}#/detail?id=${this.form.id}`
 				this.handleCopy(text)
 				this.$message.success('链接已复制，感谢分享！')
 			},
@@ -292,5 +295,21 @@
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 4;
 		overflow: hidden;
+	}
+	
+	.ant-tag-card{
+		position: absolute;
+		top: 13px;
+		right: -38px;
+		width: 110px;
+		height: 24px;
+		line-height: 24px;
+		font-size: 12px;
+		letter-spacing: 5px;
+		box-shadow: 0 3px 5px rgba(0,0,0,.3);
+		color: #FFFFFF;
+		text-align: center;
+		background-color: #1890FF;
+		transform: rotate(45deg);
 	}
 </style>

@@ -3,4 +3,5 @@ export default {
 	interfaceUrl : "http://www.yslucky.host/api",
 	
 	mediaUrl : "http://www.yslucky.host/",
+	onLineUrl : "http://www.yangsong.cool/"
 }
