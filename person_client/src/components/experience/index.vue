@@ -17,9 +17,24 @@
 			<a-spin size="large" :spinning="!showData"/>
 		</div>
 		
+		<!-- 问题笔记列表 -->
+		<a-row v-show="showData">
+			<a-col v-for="(item,index) in noteList" :xs="24" :sm="24" :md="24" :lg="12" :xl="8">
+				<Card :noteItem="item" @deleteNote="deleteNote(item.id)" @editNote="editNote(item)"></Card>
+			</a-col>
+		</a-row>
+		
+		<!-- 分页 -->
+		<div style="text-align: right;margin-right: 10px; padding-bottom: 10px;" v-show="showData && noteList.length > 0">
+			<a-pagination :default-current="1" :defaultPageSize="9" :total="total" @change="pagesChange"/>
+		</div>
+		
+		
+		<!-- 添加 修改note  -->
 		<a-modal
 		      title="写笔记"
 		      :visible="visible"
+			  :closable="false"
 		      :confirm-loading="confirmLoading"
 			  :width="width"
 			  :footer="null"
@@ -32,17 +47,35 @@
 			  			@blur="  () => { $refs.name.onFieldBlur();} " />
 			  	</a-form-model-item>
 			  	<a-form-model-item ref="answer" label="答案" prop="answer">
-			  		<a-input v-model="form.answer" placeholder="用简洁的语言解答问题或者解决方法" type="textarea"
-			  			style="height: 100px; resize: none;"
+			  		<a-input v-model="form.answer" placeholder="用详细的语言解答问题或者解决方法" type="textarea"
+			  			style="height: 50px; resize: none;" @click="editText()"
 			  			@blur="  () => { $refs.answer.onFieldBlur();} " />
 			  	</a-form-model-item>
 			  	<a-form-model-item ref="url" label="相关链接" prop="url">
 			  		<a-input v-model="form.url" placeholder="网上解决的方法或者知识点相关官网"
 			  			@blur="  () => { $refs.url.onFieldBlur();} " />
 			  	</a-form-model-item>
+				<a-form-model-item ref="code_file" label="代码文件" prop="code_file">
+					<!-- <a-input v-model="form.code_file" placeholder="相关编写的代码文件,可以为空"
+						@blur="  () => { $refs.code_file.onFieldBlur();} " /> -->
+					<a-upload
+						:action="url"
+						:multiple="false"
+						:file-list="fileList"
+						@change="handleChange"
+					  >
+						<a-button> <a-icon type="upload" /> 上传文件 </a-button>
+					  </a-upload>
+				</a-form-model-item>
 			  	<a-form-model-item ref="other"  prop="other"label="其他">
-			  		<a-input v-model="form.other" placeholder="其他相关知识" type="textarea"
-			  			style="height: 50px; resize: none;" />
+			  		<!-- <a-input v-model="form.other" placeholder="其他相关知识" type="textarea"
+			  			style="height: 50px; resize: none;" /> -->
+					<a-select mode="tags" v-model="tags" style="width: 100%" allowClear placeholder="可选至多 3 个标签，支持搜索" :maxTagCount="6"
+						@change="handleSelectTag" :defaultValue="defaultTags">
+						<a-select-option v-for="i in tagList" :key="i.toString()">
+							{{ i }}
+						</a-select-option>
+					</a-select>
 			  	</a-form-model-item>
 				
 				<a-form-model-item :wrapper-col="wrapperCol1">
@@ -57,32 +90,41 @@
 			  </a-form-model>
 		</a-modal>
 		
-		<!-- 问题笔记列表 -->
-		<a-row v-show="showData">
-			<a-col v-for="(item,index) in noteList" :xs="24" :sm="24" :md="24" :lg="12" :xl="8">
-				<Card :noteItem="item" @deleteNote="deleteNote(item.id)" @editNote="editNote(item)"></Card>
-			</a-col>
-		</a-row>
-		
-		<!-- 分页 -->
-		<div style="text-align: right;margin-right: 10px; padding-bottom: 10px;" v-show="showData && noteList.length > 0">
-			<a-pagination :default-current="1" :defaultPageSize="9" :total="total" @change="pagesChange"/>
-		</div>
+		<!-- 富文本 -->
+		<a-modal
+		      title="写解答"
+		      :visible="visible1"
+			  :closable="false"
+			  :width="width1"
+			  :footer="null"
+		    >
+			<Editor @save="save" :name="form.name" :answer="form.answer"></Editor>
+		</a-modal>
 		
 	</div>
 </template>
 
 <script>
+const Editor = ()=> import('./juejinEditor.vue')
 import Card from './card.vue'
+// import Editor from './juejinEditor.vue'
+
 export default {
 	data(){
 		return {
 			visible:false,
+			visible1:false,
 			confirmLoading:false,
 			width:'40%',
+			width1:'80%',
 			value:'',
 			showData:false,
 			searchData:false,
+			
+			fileList:[], // 代码文件
+			defaultTags:[],
+			tags:[],
+			tagList: ['PHP', 'Vue', 'Html', 'Css', 'MySQL', 'MongoDB', 'Redis', 'Nginx', 'Apache', '小程序', 'H5', 'APP'],
 			
 			labelCol: {
 				sm: {
@@ -126,11 +168,14 @@ export default {
 			},
 			
 			editId:'',
+			url: this.config.interfaceUrl + '/note/uploadNoteFile',
 			// 笔记信息
 			form: {
 				name:'',
 				answer:'',
 				url:'',
+				code_file:'',
+				image:'',
 				other:''
 			},
 			total:0,
@@ -170,7 +215,7 @@ export default {
 		}
 	},
 	components:{
-		Card
+		Card,Editor
 	},
 	mounted() {
 		// 获取笔记列表
@@ -184,6 +229,7 @@ export default {
 			this.width = '40%'
 		}else{
 			this.width = '510px'
+			this.width1 = '510px'
 		}
 		
 		window.addEventListener('resize',()=>{
@@ -195,10 +241,12 @@ export default {
 				this.width = '40%'
 			}else{
 				this.width = '510px'
+				this.width1 = '510px'
 			}
 		})
 	},
 	methods:{
+		// 显示创建
 		showNoteForm(){
 			this.editId = 0
 			this.visible = true
@@ -210,9 +258,14 @@ export default {
 			this.axios.get('/notes',{
 					params:this.query,
 				}).then(res => {
-					console.log(res)
+					// console.log(res)
 					if (res.status == 1) {
 						this.noteList = res.data.data
+						
+						this.noteList.forEach(item => {
+							item.other = item.other.split(',')
+						})
+						
 						this.total = res.data.total
 						this.showData = true
 					} else {
@@ -242,6 +295,9 @@ export default {
 			}else{
 				this.$refs.ruleForm.validate(valid => {
 					if (valid) {
+						let arr = []
+						this.fileList.forEach(item => arr.push(item.response.data))
+						this.form.code_file = arr.join(',')
 						console.log(this.form)
 						// return
 						this.axios.post('note', {
@@ -283,6 +339,50 @@ export default {
 			this.visible = true
 			this.editId = item.id
 			this.form = item
+			this.form.other.forEach(item => this.tags.push(item)) 
+		},
+		// 转去富文本
+		editText(){
+			if(!this.form.name){
+				this.$message.warn('请先填写问题题目或者bug')
+				return 
+			}
+			this.visible1 = true
+		},
+		// 回来
+		save(val){
+			this.visible1 = false
+			this.form.answer = val
+		},
+		// 文件上传事件
+		handleChange(info) {
+		      let fileList = [...info.fileList];
+		
+		      // 1. Limit the number of uploaded files
+		      //    Only to show two recent uploaded files, and old ones will be replaced by the new
+		      fileList = fileList.slice(-2);
+		
+		      // 2. read from response and show file link
+		      fileList = fileList.map(file => {
+		        if (file.response) {
+		          // Component will show file.url as link
+		          file.url = file.response.url;
+		        }
+		        return file;
+		      });
+		
+		      this.fileList = fileList;
+		    },
+		// 标签选择
+		handleSelectTag(val) {
+			// console.log(val)
+			if(val.length >3){
+				this.$message.warning('最多只能选择3个标签')
+				this.tags.splice(this.tags.length - 1,1)
+			}else if(val.length < 1){
+				this.$message.warning('至少选择1个标签')
+			}
+			this.form.other = this.tags.join(',')
 		},
 		// 分页
 		pagesChange(page,pagesize){
@@ -290,9 +390,11 @@ export default {
 			this.query.page_current = page
 			this.getNoteList()
 		},
+		// 取消
 		handleCancel(){
 			this.visible = false
-			// this.$refs.ruleForm.resetFields();
+			this.tags = []
+			this.$refs.ruleForm.resetFields();
 		}
 	}
 }

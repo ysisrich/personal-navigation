@@ -14,6 +14,14 @@ const routes = [
 	},
 	children:[
 		{
+		  path: 'editor',
+		  name: 'Editor',
+		  component: ()=> import('@/components/experience/juejinEditor.vue'),
+			meta: {
+				title: '个人导航-笔记'
+			}
+		},
+		{
 		  path: 'person',
 		  name: 'Person',
 		  redirect:'/person/baseInfo',
@@ -75,7 +83,7 @@ const routes = [
 		  name: 'Experience',
 		  component: ()=> import('@/components/experience/index.vue'),
 			meta: {
-				title: '个人导航-经历'
+				title: '个人导航-笔记'
 			}
 		}
 	]

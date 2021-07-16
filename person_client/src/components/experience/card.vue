@@ -41,19 +41,25 @@
 					Q: {{noteItem.name}}
 				</a-tooltip>
 			</div>
-			<div slot="description" class="ant-fonts-description" style="margin: 10px auto;display: flex;">
+			<div slot="description" class="ant-fonts-description" style="margin: 0px auto;display: flex;">
 				<div style="width: 20px; min-width: 20px;color: #000;font-weight: 600;">A： </div>
 				<div class="ant-text-answer">{{noteItem.answer}}</div>
 			</div>
 			
 		</a-card-meta>
-		<div v-if="noteItem.url" style="margin: 10px auto;display: flex;">
+		<!-- <div v-if="noteItem.url" style="margin: 10px auto;display: flex;">
 			<div style="width: 70px; min-width: 70px;">相关链接：</div>
 			<div class="ant-text-long v" @click="toUrl">{{noteItem.url}}</div>
-		</div>
-		<div v-if="noteItem.other" style="margin: 10px auto;display: flex;">
+		</div> -->
+		<!-- <div v-if="noteItem.other" style="margin: 10px auto;display: flex;">
 			<div style="width: 42px; min-width: 42px;">其他：</div>
 			<div class="ant-text-long">{{noteItem.other}}</div>
+		</div> -->
+		
+		<div v-if="noteItem.other" class="ant-card-body-tags">
+			<a-tag v-for="(i,index) in noteItem.other" :color="tag_colors[Math.ceil(Math.random()*7) - 1]">
+				{{i}}
+			</a-tag>
 		</div>
 	</a-card>
 </template>
@@ -121,12 +127,12 @@
 		box-shadow:0 0 10px rgba(0,0,0,0.3);
 	}
 	.ant-card-item:hover .ant-fonts{
-		color: #1890FF;
+		/* color: #1890FF; */
 	}
 	.ant-card-body-tags{
-		margin-top: 30px;
-		margin-bottom: 10px;
-		text-align: right;
+		margin-top: 20px;
+		/* margin-bottom: 10px; */
+		/* text-align: right; */
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -145,7 +151,8 @@
 	.ant-text-answer{
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 1;
+		-webkit-line-clamp: 3;
+		height: 65px;
 		overflow: hidden;
 		word-break: break-all;
 	}
