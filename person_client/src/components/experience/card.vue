@@ -1,8 +1,7 @@
 <template>
-	<a-card  class="ant-card-item" hoverable style="width: 97%;margin:0 0px 15px 10px;">
+	<a-card  class="ant-card-item" hoverable style="width: 97%;margin:0 0px 15px 10px;" @click="toDetail(noteItem.id)">
 
 		<template slot="actions" class="ant-card-actions">
-
 			<a-tooltip placement="top">
 				<template slot="title">
 					<span>编辑</span>
@@ -44,29 +43,29 @@
 			<div slot="description" class="ant-fonts-description" style="margin: 0px auto;display: flex;">
 				<div style="width: 20px; min-width: 20px;color: #000;font-weight: 600;">A： </div>
 				<div class="ant-text-answer">{{noteItem.answer}}</div>
+				<!-- <div class="ant-text-answer markdown-body">
+					<VueMarkdown :source="noteItem.answer" v-highlight></VueMarkdown>
+				</div> -->
 			</div>
 			
 		</a-card-meta>
-		<!-- <div v-if="noteItem.url" style="margin: 10px auto;display: flex;">
-			<div style="width: 70px; min-width: 70px;">相关链接：</div>
-			<div class="ant-text-long v" @click="toUrl">{{noteItem.url}}</div>
-		</div> -->
-		<!-- <div v-if="noteItem.other" style="margin: 10px auto;display: flex;">
-			<div style="width: 42px; min-width: 42px;">其他：</div>
-			<div class="ant-text-long">{{noteItem.other}}</div>
-		</div> -->
 		
-		<div v-if="noteItem.other" class="ant-card-body-tags">
+		
+		
+		<div v-if="noteItem.other[0].length != 0" class="ant-card-body-tags">
 			<a-tag v-for="(i,index) in noteItem.other" :color="tag_colors[Math.ceil(Math.random()*7) - 1]">
 				{{i}}
 			</a-tag>
 		</div>
+		<div v-else style="margin-top: 20px;height: 22px;"></div>
+
 	</a-card>
 </template>
 
 <script>
 	import { Icon } from 'ant-design-vue';
-	
+	import VueMarkdown from 'vue-markdown'
+
 	const IconFont = Icon.createFromIconfontCN({
 	  scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
 	});
@@ -81,12 +80,16 @@
 			}
 		},
 		components: {
-		    IconFont,
+		    IconFont,VueMarkdown
 		},
 		mounted() {
 			// console.log(this.noteItem)
 		},
 		methods: {
+			// 帖子详细介绍
+			toDetail(id){
+				this.$router.push(`/detail_note?id=${id}`)	
+			},
 			// 编辑问题笔记信息
 			edit(id){
 				this.$emit('editNote')	
@@ -123,6 +126,7 @@
 </script>
 
 <style scoped>
+	
 	.ant-card-item:hover{
 		box-shadow:0 0 10px rgba(0,0,0,0.3);
 	}

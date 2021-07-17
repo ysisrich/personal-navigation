@@ -31,7 +31,7 @@
 		
 		
 		<!-- 添加 修改note  -->
-		<a-modal
+		<!-- <a-modal
 		      title="写笔记"
 		      :visible="visible"
 			  :closable="false"
@@ -40,55 +40,7 @@
 			  :footer="null"
 		    >
 			  
-			  <a-form-model ref="ruleForm" :model="form" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol"
-			  	labelAlign="left">
-			  	<a-form-model-item ref="name" label="名称" prop="name">
-			  		<a-input v-model="form.name" placeholder="遇到的问题名称或者讨厌的bug"
-			  			@blur="  () => { $refs.name.onFieldBlur();} " />
-			  	</a-form-model-item>
-			  	<a-form-model-item ref="answer" label="答案" prop="answer">
-			  		<a-input v-model="form.answer" placeholder="用详细的语言解答问题或者解决方法" type="textarea"
-			  			style="height: 50px; resize: none;" @click="editText()"
-			  			@blur="  () => { $refs.answer.onFieldBlur();} " />
-			  	</a-form-model-item>
-			  	<a-form-model-item ref="url" label="相关链接" prop="url">
-			  		<a-input v-model="form.url" placeholder="网上解决的方法或者知识点相关官网"
-			  			@blur="  () => { $refs.url.onFieldBlur();} " />
-			  	</a-form-model-item>
-				<a-form-model-item ref="code_file" label="代码文件" prop="code_file">
-					<!-- <a-input v-model="form.code_file" placeholder="相关编写的代码文件,可以为空"
-						@blur="  () => { $refs.code_file.onFieldBlur();} " /> -->
-					<a-upload
-						:action="url"
-						:multiple="false"
-						:file-list="fileList"
-						@change="handleChange"
-					  >
-						<a-button> <a-icon type="upload" /> 上传文件 </a-button>
-					  </a-upload>
-				</a-form-model-item>
-			  	<a-form-model-item ref="other"  prop="other"label="其他">
-			  		<!-- <a-input v-model="form.other" placeholder="其他相关知识" type="textarea"
-			  			style="height: 50px; resize: none;" /> -->
-					<a-select mode="tags" v-model="tags" style="width: 100%" allowClear placeholder="可选至多 3 个标签，支持搜索" :maxTagCount="6"
-						@change="handleSelectTag" :defaultValue="defaultTags">
-						<a-select-option v-for="i in tagList" :key="i.toString()">
-							{{ i }}
-						</a-select-option>
-					</a-select>
-			  	</a-form-model-item>
-				
-				<a-form-model-item :wrapper-col="wrapperCol1">
-					<a-button type="primary" style="width:40%;min-width: 64px;" @click="handleOk">
-						提交
-					</a-button>
-					<a-button style="margin-left: 30px;" @click="handleCancel">
-						取消
-					</a-button>
-				</a-form-model-item>
-				
-			  </a-form-model>
-		</a-modal>
+		</a-modal> -->
 		
 		<!-- 富文本 -->
 		<a-modal
@@ -105,7 +57,7 @@
 </template>
 
 <script>
-const Editor = ()=> import('./juejinEditor.vue')
+const Editor = ()=> import('./vidtor.vue')
 import Card from './card.vue'
 // import Editor from './juejinEditor.vue'
 
@@ -229,7 +181,6 @@ export default {
 			this.width = '40%'
 		}else{
 			this.width = '510px'
-			this.width1 = '510px'
 		}
 		
 		window.addEventListener('resize',()=>{
@@ -241,16 +192,16 @@ export default {
 				this.width = '40%'
 			}else{
 				this.width = '510px'
-				this.width1 = '510px'
 			}
 		})
 	},
 	methods:{
 		// 显示创建
 		showNoteForm(){
-			this.editId = 0
-			this.visible = true
-			this.form = {}
+			// this.editId = 0
+			// this.visible = true
+			// this.form = {}
+			this.$router.push('/publish_note?id=0')
 		},
 		// 获取笔记列表
 		getNoteList() {
@@ -390,12 +341,8 @@ export default {
 			this.query.page_current = page
 			this.getNoteList()
 		},
-		// 取消
-		handleCancel(){
-			this.visible = false
-			this.tags = []
-			this.$refs.ruleForm.resetFields();
-		}
+		
+		
 	}
 }
 </script>

@@ -30,7 +30,6 @@ export default {
 	}
   },
   mounted() {
-	  console.log(111,this.answer)
 	  // this.value = this.answer
 	  
   },

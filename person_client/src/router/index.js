@@ -75,7 +75,7 @@ const routes = [
 		  name: 'Detail',
 		  component: ()=> import('@/components/project/detail.vue'),
 			meta: {
-				title: '个人导航-编辑项目'
+				title: '个人导航-详细介绍'
 			},
 		},
 		{
@@ -85,7 +85,23 @@ const routes = [
 			meta: {
 				title: '个人导航-笔记'
 			}
-		}
+		},
+		{
+		  path: 'publish_note',
+		  name: 'Publish_note',
+		  component: ()=> import('@/components/experience/create_note.vue'),
+			meta: {
+				title: '个人导航-发布笔记'
+			}
+		},
+		{
+		  path: 'detail_note',
+		  name: 'DetailNote',
+		  component: ()=> import('@/components/experience/detail.vue'),
+			meta: {
+				title: '个人导航-详细介绍'
+			},
+		},
 	]
   },
   
