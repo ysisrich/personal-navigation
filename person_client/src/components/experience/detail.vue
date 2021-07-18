@@ -39,7 +39,7 @@
 					<div style="margin-bottom: 10px" v-if="form.code_file">
 						<span>代码文件：</span>
 						<span style="color: #1890ff;cursor: pointer;">
-							<a-tag v-for="(i,index) in defaultTags" :color="tag_colors[Math.ceil(Math.random()*7) - 1]">
+							<a-tag :color="tag_colors[Math.ceil(Math.random()*7) - 1]">
 								{{form.code_file.split('.')[1]}}文件
 							</a-tag>
 							<span @click="downloadFile(form.code_file)">
