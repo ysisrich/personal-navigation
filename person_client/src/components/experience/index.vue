@@ -26,7 +26,7 @@
 		
 		<!-- 分页 -->
 		<div style="text-align: right;margin-right: 10px; padding-bottom: 10px;" v-show="showData && noteList.length > 0">
-			<a-pagination :default-current="1" :defaultPageSize="9" :total="total" @change="pagesChange"/>
+			<a-pagination :default-current="1" :defaultPageSize="9" :total="total" :show-total="total => `总共 ${total} 个`" @change="pagesChange"/>
 		</div>
 		
 		

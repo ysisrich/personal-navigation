@@ -1,6 +1,22 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+const Index = ()=> import('@/layout/default.vue')
+const Editor = ()=> import('@/components/experience/juejinEditor.vue')
+const Person = ()=> import('@/components/person/index.vue')
+const BaseInfo =  ()=> import('@/components/person/base_info.vue')
+const EditBaseInfo = ()=> import('@/components/person/edit_base_info.vue')
+const Other = ()=> import('@/components/person/other.vue')
+const EditOtherInfo = ()=> import('@/components/person/edit_other_info.vue')
+const Resume = ()=> import('@/components/resume/index.vue')
+const Project = ()=> import('@/components/project/index.vue')
+const Publish = ()=> import('@/components/project/create_project.vue')
+const EditProject = ()=> import('@/components/project/edit_project.vue')
+const Detail = ()=> import('@/components/project/detail.vue')
+const Experience = ()=> import('@/components/experience/index.vue')
+const Publish_note = ()=> import('@/components/experience/create_note.vue')
+const DetailNote = ()=> import('@/components/experience/detail.vue')
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -8,7 +24,7 @@ const routes = [
     path: '/',
     name: 'Index',
 	redirect:'person',
-    component: ()=> import('@/layout/default.vue'),
+    component: Index,
 	meta: {
 		title: '个人导航'
 	},
@@ -16,7 +32,7 @@ const routes = [
 		{
 		  path: 'editor',
 		  name: 'Editor',
-		  component: ()=> import('@/components/experience/juejinEditor.vue'),
+		  component: Editor,
 			meta: {
 				title: '个人导航-笔记'
 			}
@@ -25,21 +41,21 @@ const routes = [
 		  path: 'person',
 		  name: 'Person',
 		  redirect:'/person/baseInfo',
-		  component: ()=> import('@/components/person/index.vue'),
+		  component: Person,
 			meta: {
 				title: '个人导航-个人'
 			},
 			children:[
-				{ path:'baseInfo', nane:'BaseInfo', component: ()=> import('@/components/person/base_info.vue') },
-				{ path:'editBaseInfo', nane:'EditBaseInfo', component: ()=> import('@/components/person/edit_base_info.vue') },
-				{ path:'other', nane:'Other', component: ()=> import('@/components/person/other.vue') },
-				{ path:'editOtherInfo', nane:'EditOtherInfo', component: ()=> import('@/components/person/edit_other_info.vue') },
+				{ path:'baseInfo', nane:'BaseInfo', component:  BaseInfo},
+				{ path:'editBaseInfo', nane:'EditBaseInfo', component:  EditBaseInfo},
+				{ path:'other', nane:'Other', component: Other },
+				{ path:'editOtherInfo', nane:'EditOtherInfo', component:  EditOtherInfo},
 			]
 		},
 		{
 		  path: 'resume',
 		  name: 'Resume',
-		  component: ()=> import('@/components/resume/index.vue'),
+		  component: Resume,
 			meta: {
 				title: '个人导航-简历'
 			}
@@ -47,9 +63,10 @@ const routes = [
 		{
 		  path: 'project',
 		  name: 'Project',
-		  component: ()=> import('@/components/project/index.vue'),
+		  component: Project,
 			meta: {
-				title: '个人导航-项目'
+				title: '个人导航-项目',
+				keepAlive :true
 			},
 			children:[
 			]
@@ -57,7 +74,7 @@ const routes = [
 		{
 		  path: 'publish',
 		  name: 'Publish',
-		  component: ()=> import('@/components/project/create_project.vue'),
+		  component: Publish,
 			meta: {
 				title: '个人导航-发布'
 			}
@@ -65,7 +82,7 @@ const routes = [
 		{
 		  path: 'editProject',
 		  name: 'EditProject',
-		  component: ()=> import('@/components/project/edit_project.vue'),
+		  component: EditProject,
 			meta: {
 				title: '个人导航-编辑项目'
 			},
@@ -73,7 +90,7 @@ const routes = [
 		{
 		  path: 'detail',
 		  name: 'Detail',
-		  component: ()=> import('@/components/project/detail.vue'),
+		  component: Detail,
 			meta: {
 				title: '个人导航-详细介绍'
 			},
@@ -81,23 +98,25 @@ const routes = [
 		{
 		  path: 'experience',
 		  name: 'Experience',
-		  component: ()=> import('@/components/experience/index.vue'),
+		  component: Experience,
 			meta: {
-				title: '个人导航-笔记'
+				title: '个人导航-笔记',
+				keepAlive :true
 			}
 		},
 		{
 		  path: 'publish_note',
 		  name: 'Publish_note',
-		  component: ()=> import('@/components/experience/create_note.vue'),
+		  component: Publish_note,
 			meta: {
 				title: '个人导航-发布笔记'
+				
 			}
 		},
 		{
 		  path: 'detail_note',
 		  name: 'DetailNote',
-		  component: ()=> import('@/components/experience/detail.vue'),
+		  component: DetailNote,
 			meta: {
 				title: '个人导航-详细介绍'
 			},

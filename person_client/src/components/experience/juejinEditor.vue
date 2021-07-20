@@ -8,14 +8,8 @@
 <script>
 import { Editor, Viewer } from '@bytemd/vue'
 import 'bytemd/dist/index.min.css'
-import gfm from '@bytemd/plugin-gfm'
-import highlight from '@bytemd/plugin-highlight'
-import highlight_ssr from '@bytemd/plugin-highlight-ssr'
 
 const plugins = [
-  gfm(),
-  highlight(),
-  highlight_ssr()
   // Add more plugins here
 ]
 

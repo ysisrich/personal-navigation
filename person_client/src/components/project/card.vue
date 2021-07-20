@@ -25,7 +25,7 @@
 		</template>
 		<a-card-meta style="height: 100px; ">
 
-			<div slot="title" class="ant-fonts" style="font-weight: 500;">
+			<div slot="title" class="ant-fonts" style="font-weight: 700;">
 				<a-tooltip placement="top">
 					<template slot="title">
 						<span>{{projectItem.name}}</span>

@@ -15,9 +15,20 @@ export default {
     mounted(){
         this.contentEditor = new Vditor("vditor",{
             height:400,
+			placeholder:'请输入内容',
             toolbarConfig:{
                 pin:true
             },
+			upload: {
+			  accept: 'image/*',
+			  url: this.config.interfaceUrl +'/note/uploadNoteImg',
+			  fieldName:'file',
+			  success(editor, msg){
+				  console.log(JSON.parse(msg))
+				  // this.insertValue(this.config.mediaUrl + msg.data)
+				  // console.log(this.insertValue())
+			  }
+			},
             cache:{
                 enable:false
             },
@@ -26,11 +37,20 @@ export default {
             },
 			blur:(value)=>{
 				this.$emit('change',value)
+			},
+			insertValue(value){
+				console.log(value)
 			}
-        })
+        },
+		)
     },
     methods:{
- 
+		getValue(val){
+			console.log(val)
+		}
     }
 }
 </script>
+<style>
+	
+</style>

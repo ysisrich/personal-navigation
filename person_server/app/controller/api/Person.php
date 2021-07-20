@@ -37,7 +37,7 @@ class Person extends BaseController
         //         '上传图片不合法'
         //     );
        	// }
-        $savename = \think\facade\Filesystem::disk('image')->putFile( 'uploads/images', $file);
+        $savename = \think\facade\Filesystem::disk('avatar_image')->putFile( 'uploads/avatar_images', $file);
         $data = Db::name('user') -> update(['avatar' => $savename,'id' => 1]);
         $response = $data ? response(1,'上传成功',$savename) : response(0,'上传失败');
         return $response;

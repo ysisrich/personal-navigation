@@ -78,7 +78,7 @@
 					
 				</a-card>
 				<a-card v-else>
-					<!-- 懒加载 -->
+					<!-- 等待加载 -->
 					<a-skeleton  :size="120" active :paragraph="false" :loading="true" v-for="index in 5" :key="index"/>
 				</a-card>
 			</a-col>
@@ -87,7 +87,7 @@
 					<div v-if="list.length > 0" class="ant-detail-other" v-for="(item,index) in list" >
 						<Card :noteItem="item" />
 					</div>
-					<!-- 懒加载 -->
+					<!-- 等待加载 -->
 					<a-skeleton v-if="list.length == 0" :size="120" active :paragraph="false" :loading="true" v-for="index in 5" :key="index"/>
 				</a-card>
 			</a-col>

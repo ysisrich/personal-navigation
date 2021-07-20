@@ -148,6 +148,7 @@ export default {
 	},
 	mounted() {
 		this.editId = Number(this.$route.query.id)
+		this.editId && this.getNoteOne()
 		
 		document.documentElement.clientWidth < 768 ? this.width = '90%' : this.width = '60%'
 		window.addEventListener('resize',()=>{
@@ -160,6 +161,21 @@ export default {
 		getValue(val){
 			this.form.answer = val
 		},
+		// 获取note信息
+		getNoteOne(){
+			this.axios.get(`note/${this.editId}`)
+			  .then(res => {
+				console.log(res)
+				if (res.status == 1) {
+					// console.log(res.data)
+					this.form  = res.data
+					console.log(this.form)
+					this.$message.success(res.info)
+				} else {
+					this.$message.error(res.info)
+				}
+			})
+		},
 		// 创建笔记 或 编辑
 		handleOk(){
 			if(this.editId){
@@ -170,8 +186,6 @@ export default {
 					if (res.status == 1) {
 						// console.log(res.data)
 						this.$message.success(res.info)
-						this.visible = false
-						this.getNoteList()
 					} else {
 						this.$message.error(res.info)
 					}

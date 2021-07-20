@@ -6,7 +6,7 @@
 				<template slot="title">
 					<span>编辑</span>
 				</template>
-				<a-icon @click.stop="edit(noteItem.id)" key="edit" type="edit" />
+				<a-icon @click.stop="share(noteItem.id)" key="edit" type="share-alt" />
 			</a-tooltip>
 			<a-tooltip placement="top">
 				<template slot="title">
@@ -90,9 +90,14 @@
 			toDetail(id){
 				this.$router.push(`/detail_note?id=${id}`)	
 			},
+			share(){
+				let text = `我在个人导航发现了『 ${this.noteItem.name} 』 快来看看 ${this.config.onLineUrl}#/detail_note?id=${this.noteItem.id}`
+				this.handleCopy(text)
+				this.$message.success('链接已复制，感谢分享！')
+			},
 			// 编辑问题笔记信息
 			edit(id){
-				this.$emit('editNote')	
+				// this.$router.push(`/publish_note?id=${id}`)	
 			},
 			// 删除笔记记录
 			deleteNote(id){
@@ -100,13 +105,15 @@
 				
 			},
 			confirmDelete(){
-				this.$emit('deleteNote')
+				// this.$emit('deleteNote')
 			},
 			cancelDelete(){
 				
 			},
 			// 访问链接
 			toUrl(){
+				if(!this.noteItem.url)
+					return this.$message.warn('暂无访问链接')
 				window.open(this.noteItem.url)
 			},
 			// 复制链接

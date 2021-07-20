@@ -68,7 +68,7 @@
 		      @ok="handleOk"
 		      @cancel="handleCancel"
 		    >
-		      <a-textarea placeholder="请输入内容" :rows="4" v-model="value"/>
+		      <a-textarea placeholder="请输入内容" :rows="9" v-model="value"/>
 		</a-modal>
 		
 	</div>
