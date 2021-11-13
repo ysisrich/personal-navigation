@@ -262,10 +262,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 	.ant-add-note {
 		width: 100%;
-		background-color: #fff;
-	
+		background-color: #fff
 	}
+
+	/deep/ .vditor-toolbar{
+		padding-left: 0 !important;
+	}
+ 
 </style>

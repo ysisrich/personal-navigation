@@ -1,21 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-const Index = ()=> import('@/layout/default.vue')
-const Editor = ()=> import('@/components/experience/juejinEditor.vue')
-const Person = ()=> import('@/components/person/index.vue')
-const BaseInfo =  ()=> import('@/components/person/base_info.vue')
-const EditBaseInfo = ()=> import('@/components/person/edit_base_info.vue')
-const Other = ()=> import('@/components/person/other.vue')
-const EditOtherInfo = ()=> import('@/components/person/edit_other_info.vue')
-const Resume = ()=> import('@/components/resume/index.vue')
-const Project = ()=> import('@/components/project/index.vue')
-const Publish = ()=> import('@/components/project/create_project.vue')
-const EditProject = ()=> import('@/components/project/edit_project.vue')
-const Detail = ()=> import('@/components/project/detail.vue')
-const Experience = ()=> import('@/components/experience/index.vue')
-const Publish_note = ()=> import('@/components/experience/create_note.vue')
-const DetailNote = ()=> import('@/components/experience/detail.vue')
+
+
+
+
+
 
 Vue.use(VueRouter)
 
@@ -24,7 +14,7 @@ const routes = [
     path: '/',
     name: 'Index',
 	redirect:'person',
-    component: Index,
+    component: resolve=> require(['@/layout/default.vue'],resolve),
 	meta: {
 		title: '个人导航'
 	},
@@ -32,7 +22,7 @@ const routes = [
 		{
 		  path: 'editor',
 		  name: 'Editor',
-		  component: Editor,
+		  component: resolve=> require(['@/components/experience/juejinEditor.vue'],resolve),
 			meta: {
 				title: '个人导航-笔记'
 			}
@@ -41,21 +31,21 @@ const routes = [
 		  path: 'person',
 		  name: 'Person',
 		  redirect:'/person/baseInfo',
-		  component: Person,
+		  component: resolve=> require(['@/components/person/index.vue'],resolve),
 			meta: {
 				title: '个人导航-个人'
 			},
 			children:[
-				{ path:'baseInfo', nane:'BaseInfo', component:  BaseInfo},
-				{ path:'editBaseInfo', nane:'EditBaseInfo', component:  EditBaseInfo},
-				{ path:'other', nane:'Other', component: Other },
-				{ path:'editOtherInfo', nane:'EditOtherInfo', component:  EditOtherInfo},
+				{ path:'baseInfo', nane:'BaseInfo', component:  resolve=> require(['@/components/person/base_info.vue'],resolve)},
+				{ path:'editBaseInfo', nane:'EditBaseInfo', component:  resolve=> require(['@/components/person/edit_base_info.vue'],resolve)},
+				{ path:'other', nane:'Other', component: resolve=> require(['@/components/person/other.vue'],resolve) },
+				{ path:'editOtherInfo', nane:'EditOtherInfo', component:  resolve=> require(['@/components/person/edit_other_info.vue'],resolve)},
 			]
 		},
 		{
 		  path: 'resume',
 		  name: 'Resume',
-		  component: Resume,
+		  component: resolve=> require(['@/components/resume/index.vue'],resolve),
 			meta: {
 				title: '个人导航-简历'
 			}
@@ -63,7 +53,7 @@ const routes = [
 		{
 		  path: 'project',
 		  name: 'Project',
-		  component: Project,
+		  component: resolve=> require(['@/components/project/index.vue'],resolve),
 			meta: {
 				title: '个人导航-项目',
 				keepAlive :true
@@ -74,7 +64,7 @@ const routes = [
 		{
 		  path: 'publish',
 		  name: 'Publish',
-		  component: Publish,
+		  component: resolve=> require(['@/components/project/create_project.vue'],resolve),
 			meta: {
 				title: '个人导航-发布'
 			}
@@ -82,7 +72,7 @@ const routes = [
 		{
 		  path: 'editProject',
 		  name: 'EditProject',
-		  component: EditProject,
+		  component: resolve=> require(['@/components/project/edit_project.vue'],resolve),
 			meta: {
 				title: '个人导航-编辑项目'
 			},
@@ -90,7 +80,7 @@ const routes = [
 		{
 		  path: 'detail',
 		  name: 'Detail',
-		  component: Detail,
+		  component: resolve=> require(['@/components/project/detail.vue'],resolve),
 			meta: {
 				title: '个人导航-详细介绍'
 			},
@@ -98,7 +88,7 @@ const routes = [
 		{
 		  path: 'experience',
 		  name: 'Experience',
-		  component: Experience,
+		  component: resolve=> require(['@/components/experience/index.vue'],resolve),
 			meta: {
 				title: '个人导航-笔记',
 				keepAlive :true
@@ -107,7 +97,7 @@ const routes = [
 		{
 		  path: 'publish_note',
 		  name: 'Publish_note',
-		  component: Publish_note,
+		  component: resolve=> require(['@/components/experience/create_note.vue'],resolve),
 			meta: {
 				title: '个人导航-发布笔记'
 				
@@ -116,7 +106,7 @@ const routes = [
 		{
 		  path: 'detail_note',
 		  name: 'DetailNote',
-		  component: DetailNote,
+		  component: resolve=> require(['@/components/experience/detail.vue'],resolve),
 			meta: {
 				title: '个人导航-详细介绍'
 			},

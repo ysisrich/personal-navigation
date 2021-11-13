@@ -6,6 +6,9 @@
 <script>
 import Vditor from "vditor"
 import "vditor/dist/index.css"
+import config from '../../../config.js'
+
+console.log(config)
 export default {
     data(){
         return{
@@ -25,8 +28,8 @@ export default {
 			  fieldName:'file',
 			  success(editor, msg){
 				  console.log(JSON.parse(msg))
-				  // this.insertValue(this.config.mediaUrl + msg.data)
-				  // console.log(this.insertValue())
+				  this.insertValue(config.mediaUrl + msg.data)
+				  console.log(this.insertValue())
 			  }
 			},
             cache:{

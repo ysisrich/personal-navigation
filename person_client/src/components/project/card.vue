@@ -39,7 +39,7 @@
 			<a-avatar slot="avatar" shape="square" :size="100" :src="projectItem.images[0]" />
 		</a-card-meta>
 		<div class="ant-card-body-tags">
-			<a-tag v-for="(i,index) in projectItem.tag" :color="tag_colors[Math.ceil(Math.random()*7) - 1]">
+			<a-tag v-for="(i,index) in projectItem.tag" :key="index" :color="tag_colors[Math.ceil(Math.random()*7) - 1]">
 				{{i}}
 			</a-tag>
 		</div>

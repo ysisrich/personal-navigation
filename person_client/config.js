@@ -1,7 +1,7 @@
 export default {
 	// 请求接口地址
-	interfaceUrl : "http://www.yslucky.host/api",
+	interfaceUrl : "http://nav.yangsong.cool/api",
 	
-	mediaUrl : "http://www.yslucky.host/",
+	mediaUrl : "http://nav.yangsong.cool/",
 	onLineUrl : "http://www.yangsong.cool/"
 }

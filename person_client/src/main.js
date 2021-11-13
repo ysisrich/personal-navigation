@@ -6,6 +6,7 @@ import store from './store'
 import './plugins/ant-design-vue.js'
 
 
+
 // 图片查看器
 import Viewer from 'v-viewer'
 import 'viewerjs/dist/viewer.css'

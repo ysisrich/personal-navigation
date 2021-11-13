@@ -30,7 +30,7 @@
 					<div style="margin: 10px 0;" v-if="form.other">
 						<span>内容标签：</span>
 						<span style="color: #1890ff;cursor: pointer;">
-							<a-tag v-for="(i,index) in defaultTags" :color="tag_colors[Math.ceil(Math.random()*7) - 1]">
+							<a-tag v-for="(i,index) in defaultTags" key="index" :color="tag_colors[Math.ceil(Math.random()*7) - 1]">
 								{{i}}
 							</a-tag>
 						</span> 

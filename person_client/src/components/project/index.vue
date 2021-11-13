@@ -18,7 +18,7 @@
 		
 		<!-- 项目列表 -->
 		<a-row v-show="showData">
-			<a-col v-for="(item,index) in projectList" :xs="24" :sm="24" :md="24" :lg="12" :xl="8">
+			<a-col v-for="(item,index) in projectList" :key="index" :xs="24" :sm="24" :md="24" :lg="12" :xl="8">
 				<Card :projectItem="item"></Card>
 			</a-col>
 		</a-row>

@@ -53,7 +53,7 @@
 		
 		
 		<div v-if="noteItem.other[0].length != 0" class="ant-card-body-tags">
-			<a-tag v-for="(i,index) in noteItem.other" :color="tag_colors[Math.ceil(Math.random()*7) - 1]">
+			<a-tag v-for="(i,index) in noteItem.other" :key="index" :color="tag_colors[Math.ceil(Math.random()*7) - 1]">
 				{{i}}
 			</a-tag>
 		</div>

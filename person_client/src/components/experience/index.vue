@@ -19,7 +19,7 @@
 		
 		<!-- 问题笔记列表 -->
 		<a-row v-show="showData">
-			<a-col v-for="(item,index) in noteList" :xs="24" :sm="24" :md="24" :lg="12" :xl="8">
+			<a-col v-for="(item,index)  in noteList" :key="index" :xs="24" :sm="24" :md="24" :lg="12" :xl="8">
 				<Card :noteItem="item" @deleteNote="deleteNote(item.id)" @editNote="editNote(item)"></Card>
 			</a-col>
 		</a-row>
