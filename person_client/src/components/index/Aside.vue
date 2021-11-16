@@ -2,28 +2,11 @@
 	<a-layout-sider v-show="show" class="menu" v-model="collapsed"  :trigger="null" collapsible>
 		<div class="logo"><img class="logo-my" src="@/assets/imgs/my.png"><span v-show="!collapsed"
 				style="opacity: 1;" class="title">个人导航</span></div>
-		<a-menu theme="dark" mode="inline" :default-selected-keys="[]">
-			<a-menu-item key="1">
-				<a-icon type="smile" />
-				<span>框架</span>
+		<a-menu theme="dark" mode="inline" :default-selected-keys="[]" @click="handleClick">
+			<a-menu-item :key="item.key" v-for="(item) in menus">
+				<a-icon :type="item.icon" />
+				<span>{{item.name}}</span>
 			</a-menu-item>
-			<a-menu-item key="2">
-				<a-icon type="smile" />
-				<span>资源</span>
-			</a-menu-item>
-			<a-menu-item key="3">
-				<a-icon type="smile" />
-				<span>UI库</span>
-			</a-menu-item>
-			<a-menu-item key="4">
-				<a-icon type="smile" />
-				<span>语言</span>
-			</a-menu-item>
-			<a-menu-item key="5">
-				<a-icon type="smile" />
-				<span>文档</span>
-			</a-menu-item>
-			
 		</a-menu>
 			<div class="ant-switch-close">
 				<a-icon class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="() => (collapsed = !collapsed)" />
@@ -38,6 +21,33 @@
 			return {
 				collapsed: false,
 				show:true,
+				menus:[
+					{
+						key:6,
+						name:'框架',
+						icon:'smile'
+					},
+					{
+						key:7,
+						name:'资源',
+						icon:'smile'
+					},
+					{
+						key:8,
+						name:'UI库',
+						icon:'smile'
+					},
+					{
+						key:9,
+						name:'语言',
+						icon:'smile'
+					},
+					{
+						key:10,
+						name:'文档',
+						icon:'smile'
+					}
+				]
 			}
 		},
 		mounted() {
@@ -50,7 +60,9 @@
 			})
 		},
 		methods:{
-			
+			handleClick(e){
+				this.$router.push({path:'/menu_1',query:{key:e.key}})
+			}
 		}
 	};
 </script>

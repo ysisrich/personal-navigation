@@ -111,6 +111,40 @@ const routes = [
 				title: '个人导航-详细介绍'
 			},
 		},
+
+		{
+			path: 'menu_1',
+			name: 'Menu_1',
+			component: resolve=> require(['@/components/menu_1/index.vue'],resolve),
+			meta: {
+				title: '个人导航-框架'
+			},
+		},
+		{
+			path: 'create',
+			name: 'Create',
+			component: resolve=> require(['@/components/menu_1/create.vue'],resolve),
+				meta: {
+				title: '个人导航-发布'
+			}
+		},
+		{
+			path: 'menu_detail',
+			name: 'menuDetail',
+			component: resolve=> require(['@/components/menu_1/menu_detail.vue'],resolve),
+			  meta: {
+				  title: '个人导航-详细介绍'
+			  },
+		  },
+
+		  {
+			path: 'editMenu',
+			name: 'EditMenu',
+			component: resolve=> require(['@/components/menu_1/edit_menu.vue'],resolve),
+			  meta: {
+				  title: '个人导航-编辑项目'
+			  },
+		  },
 	]
   },
   
