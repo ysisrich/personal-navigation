@@ -1,7 +1,7 @@
 <template>
 	<a-layout-sider v-show="show" class="menu" v-model="collapsed"  :trigger="null" collapsible>
 		<div class="logo"><img class="logo-my" src="@/assets/imgs/my.png"><span v-show="!collapsed"
-				style="opacity: 1;" class="title">个人导航</span></div>
+				style="opacity: 1;" class="title">个人仓库</span></div>
 		<a-menu theme="dark" mode="inline" :default-selected-keys="[]" @click="handleClick">
 			<a-menu-item :key="item.key" v-for="(item) in menus">
 				<a-icon :type="item.icon" />
@@ -28,13 +28,13 @@
 						icon:'smile'
 					},
 					{
-						key:7,
-						name:'资源',
+						key:8,
+						name:'UI库',
 						icon:'smile'
 					},
 					{
-						key:8,
-						name:'UI库',
+						key:7,
+						name:'资源',
 						icon:'smile'
 					},
 					{

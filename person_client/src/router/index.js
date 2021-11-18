@@ -16,7 +16,7 @@ const routes = [
 	redirect:'person',
     component: resolve=> require(['@/layout/default.vue'],resolve),
 	meta: {
-		title: '个人导航'
+		title: '个人仓库'
 	},
 	children:[
 		{
@@ -24,7 +24,7 @@ const routes = [
 		  name: 'Editor',
 		  component: resolve=> require(['@/components/experience/juejinEditor.vue'],resolve),
 			meta: {
-				title: '个人导航-笔记'
+				title: '个人仓库-笔记'
 			}
 		},
 		{
@@ -33,7 +33,7 @@ const routes = [
 		  redirect:'/person/baseInfo',
 		  component: resolve=> require(['@/components/person/index.vue'],resolve),
 			meta: {
-				title: '个人导航-个人'
+				title: '个人仓库-个人'
 			},
 			children:[
 				{ path:'baseInfo', nane:'BaseInfo', component:  resolve=> require(['@/components/person/base_info.vue'],resolve)},
@@ -47,7 +47,7 @@ const routes = [
 		  name: 'Resume',
 		  component: resolve=> require(['@/components/resume/index.vue'],resolve),
 			meta: {
-				title: '个人导航-简历'
+				title: '个人仓库-简历'
 			}
 		},
 		{
@@ -55,7 +55,7 @@ const routes = [
 		  name: 'Project',
 		  component: resolve=> require(['@/components/project/index.vue'],resolve),
 			meta: {
-				title: '个人导航-项目',
+				title: '个人仓库-项目',
 				keepAlive :true
 			},
 			children:[
@@ -66,7 +66,7 @@ const routes = [
 		  name: 'Publish',
 		  component: resolve=> require(['@/components/project/create_project.vue'],resolve),
 			meta: {
-				title: '个人导航-发布'
+				title: '个人仓库-发布'
 			}
 		},
 		{
@@ -74,7 +74,7 @@ const routes = [
 		  name: 'EditProject',
 		  component: resolve=> require(['@/components/project/edit_project.vue'],resolve),
 			meta: {
-				title: '个人导航-编辑项目'
+				title: '个人仓库-编辑项目'
 			},
 		},
 		{
@@ -82,7 +82,7 @@ const routes = [
 		  name: 'Detail',
 		  component: resolve=> require(['@/components/project/detail.vue'],resolve),
 			meta: {
-				title: '个人导航-详细介绍'
+				title: '个人仓库-详细介绍'
 			},
 		},
 		{
@@ -90,7 +90,7 @@ const routes = [
 		  name: 'Experience',
 		  component: resolve=> require(['@/components/experience/index.vue'],resolve),
 			meta: {
-				title: '个人导航-笔记',
+				title: '个人仓库-笔记',
 				keepAlive :true
 			}
 		},
@@ -99,7 +99,7 @@ const routes = [
 		  name: 'Publish_note',
 		  component: resolve=> require(['@/components/experience/create_note.vue'],resolve),
 			meta: {
-				title: '个人导航-发布笔记'
+				title: '个人仓库-发布笔记'
 				
 			}
 		},
@@ -108,7 +108,7 @@ const routes = [
 		  name: 'DetailNote',
 		  component: resolve=> require(['@/components/experience/detail.vue'],resolve),
 			meta: {
-				title: '个人导航-详细介绍'
+				title: '个人仓库-详细介绍'
 			},
 		},
 
@@ -117,7 +117,7 @@ const routes = [
 			name: 'Menu_1',
 			component: resolve=> require(['@/components/menu_1/index.vue'],resolve),
 			meta: {
-				title: '个人导航-框架'
+				title: '个人仓库-框架'
 			},
 		},
 		{
@@ -125,7 +125,7 @@ const routes = [
 			name: 'Create',
 			component: resolve=> require(['@/components/menu_1/create.vue'],resolve),
 				meta: {
-				title: '个人导航-发布'
+				title: '个人仓库-发布'
 			}
 		},
 		{
@@ -133,7 +133,7 @@ const routes = [
 			name: 'menuDetail',
 			component: resolve=> require(['@/components/menu_1/menu_detail.vue'],resolve),
 			  meta: {
-				  title: '个人导航-详细介绍'
+				  title: '个人仓库-详细介绍'
 			  },
 		  },
 
@@ -142,7 +142,7 @@ const routes = [
 			name: 'EditMenu',
 			component: resolve=> require(['@/components/menu_1/edit_menu.vue'],resolve),
 			  meta: {
-				  title: '个人导航-编辑项目'
+				  title: '个人仓库-编辑项目'
 			  },
 		  },
 	]

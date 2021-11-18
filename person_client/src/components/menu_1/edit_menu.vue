@@ -267,7 +267,7 @@
 							if (res.status == 1) {
 								// console.log(res.data)
 								this.$message.success(res.info)
-								this.$router.push('/menu_1')
+								this.$router.go(-1)
 							} else {
 								this.$message.error(res.info)
 							}
