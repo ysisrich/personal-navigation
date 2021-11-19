@@ -4,7 +4,7 @@
 			<div class="ant-note-title">💖 笔记本</div>
 			<div style="margin: 10px auto; color: rgba(0,0,0,.78);">将所遇到的框架进行记录，方便复习整理，有利于知识的巩固!!!</div>
 			<a-button type="primary" icon="plus" @click="showAddform">
-			      {{key == 6?'添加框架':key==7?'添加资源':key==8?'添加UI库':key==9?'添加语言':"添加文档"}}
+			      {{key == 6?'添加框架':key==7?'添加资源':key==8?'添加UI库':key==9?'添加Icon':"添加文档"}}
 			</a-button>
 		</div>
 		<a-result v-show="show" :status="status" :title="status" :sub-title="sub_title">

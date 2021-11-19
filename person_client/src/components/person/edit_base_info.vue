@@ -59,9 +59,9 @@
       <a-input v-model="form.major" @blur="  () => { $refs.major.onFieldBlur();} " />
     </a-form-model-item>
 	
-	<a-form-model-item label="毕业日期" required prop="graduation_data">
+	<a-form-model-item label="毕业日期" required prop="graduation_year">
 	  <a-month-picker
-	    v-model="form.graduation_data"
+	    v-model="form.graduation_year"
 	    type="date"
 		:locale="locale"
 	    placeholder="选择毕业日期"
@@ -92,10 +92,12 @@
 </template>
 <script>
 import locale from 'ant-design-vue/es/date-picker/locale/zh_CN'
+import moment from 'moment'
 	
 export default {
   data() {
     return {
+	  dateFormat: 'YYYY-MM-DD',
       labelCol: { 
 		  sm :{
 			  span:12,
@@ -149,7 +151,6 @@ export default {
 		email: '',
 		experience: 2,
 		graduation_year: '',
-		graduation_data:'',
 		hometown: "",
 		id: 1,
 		idcard: "",
@@ -162,7 +163,7 @@ export default {
           { required: true, message: '请填写姓名', trigger: 'blur' },
         ],
         birthday: [{ required: true, message: '请选择出生日期', trigger: 'change' }],
-		graduation_data: [{ required: true, message: '请选择毕业日期', trigger: 'change' }],
+		graduation_year: [{ required: true, message: '请选择毕业日期', trigger: 'change' }],
         sex: [
           { required: true, message: '请选择性别', trigger: 'change' },
         ],
@@ -191,6 +192,7 @@ export default {
   	this.getPersonInfo()
   },
   methods: {
+	  moment,
 	  // 转换时间
 	  dataFormat(data){
 		  let birthdays = data;
@@ -202,7 +204,9 @@ export default {
       this.$refs.ruleForm.validate(valid => {
         if (valid) {
 			this.form.age = this.dataFormat(this.form.birthday._d)
-			this.form.graduation_year = this.form.graduation_data._d.getFullYear()
+
+			this.form.birthday = moment(this.form.birthday._d).format('YYYY-MM-DD')
+			this.form.graduation_year = moment(this.form.graduation_year._d).format('YYYY-MM') + '-24'
             
 			this.axios.put(`person/personInfo/${this.form.id}`,
 			    {
@@ -215,7 +219,7 @@ export default {
 					this.$message.success(res.info)
 					this.$router.push('/person')
 				} else {
-					that.$message.error(res.info)
+					this.$message.error(res.info)
 				}
 			})
         } else {
@@ -233,6 +237,8 @@ export default {
 				if (res.status == 1) {
 					// console.log(res.data)
 					that.form = res.data
+					that.form.birthday = moment(moment(that.form.birthday).format('YYYY-MM-DD'))
+					that.form.graduation_year = moment(moment(that.form.graduation_year).format('YYYY-MM'))
 				} else {
 					that.$message.error(res.info)
 				}

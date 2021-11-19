@@ -39,7 +39,7 @@
 					<a-tag color="red" v-if="userInfo.college_type == 2">其他</a-tag>
 					<a-tag color="orange">{{userInfo.college}}</a-tag>
 					<a-tag color="pink">{{userInfo.major}}</a-tag>
-					<a-tag color="orange">{{userInfo.graduation_year}}年应届生</a-tag>
+					<a-tag color="orange">{{userInfo.graduation_year}}年毕业生</a-tag>
 					<a-tag color="blue" v-if="userInfo.identity == 0">学生</a-tag>
 					<a-tag color="blue" v-if="userInfo.identity == 1">打工人</a-tag>
 				</a-space>
@@ -92,6 +92,7 @@
 							that.userInfo = res.data
 							that.avatar = that.config.mediaUrl + res.data.avatar
 							that.loading = false
+							that.userInfo.graduation_year = new Date(that.userInfo.graduation_year).getFullYear()
 							// that.$message.success(res.info)
 						} else {
 							that.$message.error(res.info)

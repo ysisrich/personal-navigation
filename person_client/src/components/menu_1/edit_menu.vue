@@ -22,7 +22,7 @@
 				<a-form-model-item label="分类" prop="category">
 					<a-radio-group v-model="form.category" :defaultValue="form.category">
 						<a-radio :value="key">
-							{{key == 6?'框架':key==7?'资源':key==8?'UI库':key==9?'语言':"文档"}}
+							{{key == 6?'框架':key==7?'资源':key==8?'UI库':key==9?'Icon':"文档"}}
 						</a-radio>
 						
 					</a-radio-group>

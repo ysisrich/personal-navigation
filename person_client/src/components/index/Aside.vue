@@ -39,7 +39,7 @@
 					},
 					{
 						key:9,
-						name:'语言',
+						name:'Icon',
 						icon:'smile'
 					},
 					{
