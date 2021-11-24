@@ -1,4 +1,3 @@
-console.log(process.env.NODE_ENV)
 
 const compressionWebpackPlugin = require('compression-webpack-plugin'); //引入插件
 const productionGZipExtensions = ['js', 'css']; //压缩的文件类型
@@ -8,6 +7,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const {resolve} = require('path');
 
+const currentProcessEnv = process.env.NODE_ENV
 
 module.exports = {
     // publicPath:process.env.NODE_ENV === 'production' ? '/vue_workspac/aihuhuproject/' : '/',
