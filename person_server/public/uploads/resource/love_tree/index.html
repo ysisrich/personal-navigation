@@ -1,0 +1,336 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>爱心树</title>	    
+    <link type="text/css" rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
+		
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jscex.min.js"></script>
+	<script type="text/javascript" src="js/jscex-parser.js"></script>
+	<script type="text/javascript" src="js/jscex-jit.js"></script>
+	<script type="text/javascript" src="js/jscex-builderbase.min.js"></script>
+	<script type="text/javascript" src="js/jscex-async.min.js"></script>
+	<script type="text/javascript" src="js/jscex-async-powerpack.min.js"></script>
+	<script type="text/javascript" src="js/functions.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/love.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/index.js" charset="utf-8"></script>
+	
+	<style type="text/css">
+		/*.STYLE1 {
+			color: #666666;
+		}*/
+	</style>
+</head>
+<body>
+    
+    <!--填写内容-->
+    <section class='container'>
+			<!-- / Form -->
+			<form>
+				<!-- / Fieldset Alpha -->
+				<fieldset class='alpha'>
+					<legend><b>爱心树生成</b></legend>
+					<div class='frow'>
+						<input class='item' id="name" placeholder='姓名' type='text'>
+					</div>
+					<div class='frow'>
+						<input class='item' id="like_date" placeholder='开始喜欢日期' type='datetime-local'>
+					</div>
+					<div class='frow'>
+						<a class='next-step' href='#'>生成!</a>
+					</div>
+				</fieldset>
+				<!-- / Fieldset Beta -->
+				<fieldset class='beta'>
+					<legend><b>2.</b>社交信息</legend>
+					<div class='frow'>
+						<input class='item' placeholder='微信' required='required' type='url'>
+					</div>
+					<div class='frow'>
+						<input class='item' placeholder='新浪微博' required='required' type='url'>
+					</div>
+					<div class='frow'>
+						<input class='item' placeholder='腾讯微博' required='required' type='url'>
+					</div>
+					<div class='frow'>
+						<a class='prev-step' href='#'>上一步</a>
+					</div>
+					<div class='frow'>
+						<input class='submit' type='submit' value="完成">
+					</div>
+				</fieldset>
+				<!-- / Fieldset Charlie -->
+				<fieldset class='charlie'>
+					<legend><b>3.</b>完成</legend>
+					<div class='frow'>
+						<p>您的信息已经填写完整，谢谢！</p>
+					</div>
+				</fieldset>
+			</form>
+		</section>
+		
+		
+	<!--===音乐：======================================-->
+	<audio id="lottery">
+			<source src="./music/FreeLoop.mp3"/>
+	</audio>	
+	  
+	
+	<!--==============================================================-->
+	<div id="main">
+        <div id="error">
+        	抱歉！目前您的浏览器无法显示，请更新至最新版本或使用其他主流浏览器，谢谢合作。
+        </div>
+        <div id="wrap">
+            <div id="text">
+		        <div id="code">
+		            <p>
+		      		<font color="#FF0000">  	
+		      			<span class="say">亲爱的<span class="name">小幸运</span>，我爱你，虽然你看不见我对你的告白</span><br><br>
+						<span class="say">我知道我不会甜言蜜语，但是我会用行动证明一切</span><br><br>
+			        	<span class="say">你说我啰嗦，有些东西因为越在乎所以越失去</span><br><br>
+						<span class="say">因为我太爱你了，所以我失去你了</span><br><br>
+						<span class="say">因为我太啰嗦了，所以你离开了我</span><br><br>
+						<span class="say">虽然你看不见我的告白，但是我还是要把这些心里话说出来</span><br><br><br>
+                        <span class="say"><span class="space"></span> -- 爱你的人--</span>
+			  		</font>
+			  		</p>
+      			</div>
+            </div>
+		    <div id="clock-box">
+		        <span class="STYLE1"></span>
+		        <font color="#FF39E3">亲爱的<span class="name">小幸运</span>，我喜欢你</font>
+				<span class="STYLE1">已经是……</span>
+		        <div id="clock"></div>
+		    </div>
+		    <canvas id="canvas" width="1100" height="680"></canvas>
+	    </div>
+            
+    </div>
+	<script type="text/javascript">
+		window.onload = function(){
+		          
+		 }
+		 
+		    function toggleSound() {
+		                var music = document.getElementById("lottery");//获取ID  
+		                    
+		                if (music.paused) { //判读是否播放  
+		                    music.paused=false;
+		                    music.play(); //没有就播放 
+		                }    
+				}
+	</script>
+	
+	<!--==========================================================-->
+    <script>
+	    (function(){
+	        $('#main').hide();
+	        $('a.next-step').click(function(e){
+              e.preventDefault();
+              // Part 1
+              if($('.alpha').hasClass("in")) {
+                $('.alpha').removeClass("in");
+              }
+              $('.alpha').addClass("out");
+        	  
+        	  
+        	  var name = $('#name').val();
+        	  var like_date = $('#like_date').val();
+        	  var date = new Date(like_date)
+        	  $('#main').show()
+        	  
+        	  var canvas = $('#canvas');
+	        if (!canvas[0].getContext) {
+	            $("#error").show();
+	            return false;       
+	        }
+	
+	        var width = canvas.width();
+	        var height = canvas.height();        
+	        canvas.attr("width", width);
+	        canvas.attr("height", height);
+	        var opts = {
+	            seed: {
+	                x: width / 2 - 20,
+	                color: "rgb(190, 26, 37)",
+	                scale: 2
+	            },
+	            branch: [
+	                [535, 680, 570, 250, 500, 200, 30, 100, [
+	                    [540, 500, 455, 417, 340, 400, 13, 100, [
+	                        [450, 435, 434, 430, 394, 395, 2, 40]
+	                    ]],
+	                    [550, 445, 600, 356, 680, 345, 12, 100, [
+	                        [578, 400, 648, 409, 661, 426, 3, 80]
+	                    ]],
+	                    [539, 281, 537, 248, 534, 217, 3, 40],
+	                    [546, 397, 413, 247, 328, 244, 9, 80, [
+	                        [427, 286, 383, 253, 371, 205, 2, 40],
+	                        [498, 345, 435, 315, 395, 330, 4, 60]
+	                    ]],
+	                    [546, 357, 608, 252, 678, 221, 6, 100, [
+	                        [590, 293, 646, 277, 648, 271, 2, 80]
+	                    ]]
+	                ]] 
+	            ],
+	            bloom: {
+	                num: 700,
+	                width: 1080,
+	                height: 650,
+	            },
+	            footer: {
+	                width: 1200,
+	                height: 5,
+	                speed: 10,
+	            }
+	        }
+	
+	        var tree = new Tree(canvas[0], width, height, opts);
+	        var seed = tree.seed;
+	        var foot = tree.footer;
+	        var hold = 1;
+	
+	        canvas.click(function(e) {
+	            setInterval("toggleSound()",100);
+	            var offset = canvas.offset(), x, y;
+	            x = e.pageX - offset.left;
+	            y = e.pageY - offset.top;
+	            if (seed.hover(x, y)) {
+	                hold = 0; 
+	                canvas.unbind("click");
+	                canvas.unbind("mousemove");
+	                canvas.removeClass('hand');
+	            }
+	        }).mousemove(function(e){
+	            var offset = canvas.offset(), x, y;
+	            x = e.pageX - offset.left;
+	            y = e.pageY - offset.top;
+	            canvas.toggleClass('hand', seed.hover(x, y));
+	        });
+	
+	        var seedAnimate = eval(Jscex.compile("async", function () {
+	            seed.draw();
+	            while (hold) {
+	                $await(Jscex.Async.sleep(10));
+	            }
+	            while (seed.canScale()) {
+	                seed.scale(0.95);
+	                $await(Jscex.Async.sleep(10));
+	            }
+	            while (seed.canMove()) {
+	                seed.move(0, 2);
+	                foot.draw();
+	                $await(Jscex.Async.sleep(10));
+	            }
+	        }));
+	
+	        var growAnimate = eval(Jscex.compile("async", function () {
+	            do {
+	    	        tree.grow();
+	                $await(Jscex.Async.sleep(10));
+	            } while (tree.canGrow());
+	        }));
+	
+	        var flowAnimate = eval(Jscex.compile("async", function () {
+	            do {
+	    	        tree.flower(2);
+	                $await(Jscex.Async.sleep(10));
+	            } while (tree.canFlower());
+	        }));
+	
+	        var moveAnimate = eval(Jscex.compile("async", function () {
+	            tree.snapshot("p1", 240, 0, 610, 680);
+	            while (tree.move("p1", 500, 0)) {
+	                foot.draw();
+	                $await(Jscex.Async.sleep(10));
+	            }
+	            foot.draw();
+	            tree.snapshot("p2", 500, 0, 610, 680);
+	
+	            // 会有闪烁不得意这样做
+	            canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
+	            canvas.css("background", "#ffe");
+	            $await(Jscex.Async.sleep(300));
+	            canvas.css("background", "none");
+	        }));
+	
+	        var jumpAnimate = eval(Jscex.compile("async", function () {
+	            var ctx = tree.ctx;
+	            while (true) {
+	                tree.ctx.clearRect(0, 0, width, height);
+	                tree.jump();
+	                foot.draw();
+	                $await(Jscex.Async.sleep(25));
+	            }
+	        }));
+	
+	        var textAnimate = eval(Jscex.compile("async", function () {
+			    var together = new Date(like_date);
+			    $('.name').text(name)
+			    console.log(111,name)
+				// var year = 2021;
+				// var month = 11;
+				// var day = 15;
+				// var hour = 18;
+				// var minute = 10;
+				// var second = 0;
+				// var millisecond = 0
+			 //   together.setFullYear(year,month-1, day); 			//时间年月日
+			 //   together.setHours(hour);						//小时	
+			 //   together.setMinutes(minute);					//分钟
+			 //   together.setSeconds(second);					//秒前一位
+			 //   together.setMilliseconds(millisecond);				//秒第二位
+	
+			    $("#code").show().typewriter();
+	            $("#clock-box").fadeIn(500);
+	            while (true) {
+	                timeElapse(together);
+	                $await(Jscex.Async.sleep(1000));
+	            }
+	        }));
+	
+	        var runAsync = eval(Jscex.compile("async", function () {
+	            $await(seedAnimate());
+	            $await(growAnimate());
+	            $await(flowAnimate());
+	            $await(moveAnimate());
+	
+	            textAnimate().start();
+	
+	            $await(jumpAnimate());
+	        }));
+	
+	        runAsync().start();
+	        
+	        
+        	  
+            });
+            
+            
+            
+	        
+	    })();
+	    
+    </script>
+    
+    
+    
+	<!--=======附属说明====================================================-->
+	<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+		<p>
+			<!-- 适用浏览器：360、FireFox、Chrome、Safari、Opera、傲游、搜狗， 不支持IE8及以下浏览器。 -->
+		</p>
+	</div>
+	
+	
+
+	
+	
+	
+	
+	
+</body>
+</html>

@@ -53,8 +53,8 @@ class Person extends BaseController
     public function updatePersonInfo()
     {
         $data = request()->param();
-        unset($data['params']['birthday']);
-        unset($data['params']['graduation_data']);
+        // unset($data['params']['birthday']);
+        // unset($data['params']['graduation_data']);
         $res = Db::table('user') -> where('id',$data['id']) ->update($data['params']);
         $response = $res ? response(1,'更新成功',$data) : response(0,'暂无更改');
         return $response;

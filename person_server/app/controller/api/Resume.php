@@ -47,6 +47,36 @@ class Resume extends BaseController
         $response = $savename ? response(1,'上传成功',$savename) : response(0,'上传失败');
         return $response;
     }
+    
+    // 保存数据库
+     public function createResume()
+    {
+        $data = request()->param();
+        $res = Db::table('resume') ->insert($data['params']);
+        $response = $res ? response(1,'创建成功') : response(0,'创建失败');
+        return $response;
+    }
+    
+    // 获取所有文件
+     public function getResumeList()
+    {
+        $res = Db::table('resume') -> select();
+        $response = $res ? response(1,'查询成功',$res) : response(0,'查询失败');
+        return $response;
+    }
+    
+    // 删除文件
+     public function deleteFile()
+    {
+        $data = request()->param();
+        //thinkphp使用unlink函数来删除文件，参数是文件的地址
+        unlink($data["file_url"]);
+        $res = Db::table('resume') -> where('id',$data['id']) ->delete();
+        $response = $res ? response(1,'删除成功') : response(0,'删除失败');
+        return $response;
+        
+        
+    }
    
     
 }

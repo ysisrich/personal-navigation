@@ -39,3 +39,36 @@ Route::put('api/note/:id', 'api.note/updateNote'); // 更新笔记
 Route::get('api/notes', 'api.note/getConditionNote'); // 获取筛选分页笔记
 Route::delete('api/note/:id', 'api.note/deleteNote'); // 根据id删除单个笔记
 
+
+
+// Resume
+Route::get('api/resume/resumeList', 'api.resume/getResumeList'); // 获取所有文件
+Route::post('api/resume/createResume', 'api.resume/createResume'); // 上传简历文件
+Route::post('api/resume/deleteFile', 'api.resume/deleteFile'); // 根据id删除
+
+
+
+// Website
+Route::get('api/website/:id', 'api.website/getWebsiteOne'); // 根据id获取单个项目
+Route::get('api/website', 'api.website/getWebsiteList'); // 获取所有项目
+Route::post('api/website', 'api.website/createWebsite'); // 创建项目
+Route::put('api/website/:id', 'api.website/updateWebsite'); // 更新项目
+Route::get('api/websites', 'api.website/getConditionWebsite'); // 获取筛选分页项目
+
+
+
+// love_tree
+Route::get('api/love_tree', 'api.love_tree/getLovePath'); // 获取
+Route::post('api/love_tree', 'api.love_tree/createLovePath'); // 创建
+
+
+
+
+// 微信公众平台
+Route::get('wechat_api/test', 'wechat_api.test/wx'); 
+Route::get('wechat_api/index', 'wechat_api.test/index'); 
+
+
+
+
+
