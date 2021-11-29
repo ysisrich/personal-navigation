@@ -49,7 +49,7 @@
 						<span>gitee：</span><span style="color: #1890ff;cursor: pointer;" @click="toGitUrl">{{form.git_url}}</span> 赶快使用git命令进行clone吧。 
 					</div>
 					
-					<div style="margin: 10px auto;display: flex;">
+					<div style="margin: 10px auto;display: flex;" v-if="form.introduce">
 						<div style="width: 42
 						px; min-width: 42px;">详情：</div>
 						<div class="ant-text-long">{{form.introduce}}</div>

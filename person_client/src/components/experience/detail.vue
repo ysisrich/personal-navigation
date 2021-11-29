@@ -30,7 +30,7 @@
 					<div style="margin: 10px 0;" v-if="form.other">
 						<span>内容标签：</span>
 						<span style="color: #1890ff;cursor: pointer;">
-							<a-tag v-for="(i,index) in defaultTags" key="index" :color="tag_colors[Math.ceil(Math.random()*7) - 1]">
+							<a-tag v-for="(i,index) in defaultTags" :key="index" :color="tag_colors[Math.ceil(Math.random()*7) - 1]">
 								{{i}}
 							</a-tag>
 						</span> 
@@ -84,7 +84,7 @@
 			</a-col>
 			<a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="8" style="padding: 0 10px;">
 				<a-card title="其他资源" style="width: 100%;" :bordered="false" :bodyStyle="{'padding':'20px'}">
-					<div v-if="list.length > 0" class="ant-detail-other" v-for="(item,index) in list" >
+					<div v-if="list.length > 0" class="ant-detail-other" v-for="(item,index) in list" :key="index">
 						<Card :noteItem="item" />
 					</div>
 					<!-- 等待加载 -->
