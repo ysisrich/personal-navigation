@@ -9,19 +9,6 @@
       @select="onSelect"
       @search="handleSearch"
     >
-      <!-- <template slot="dataSource">
-        <a-select-option v-for="item in dataSource" :key="item.category" :title="item.category">
-          Found {{ item.query }} on
-          <a
-            :href="`https://s.taobao.com/search?q=${item.query}`"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {{ item.category }}
-          </a>
-          <span className="global-search-item-count">{{ item.count }} results</span>
-        </a-select-option>
-      </template> -->
       <a-input @keyup.enter="search">
         <a-button
           slot="suffix"

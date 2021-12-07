@@ -36,7 +36,9 @@
 			<div slot="description" class="ant-fonts-description">
 				{{projectItem.detail}}
 			</div>
-			<a-avatar slot="avatar" shape="square" :size="100" :src="projectItem.images[0]" />
+			<!-- <a-avatar slot="avatar" shape="square" :size="100" :src="projectItem.images[0]" /> -->
+			<img class="ant-img" slot="avatar" v-lazy="projectItem.images[0]" />
+
 		</a-card-meta>
 		<div class="ant-card-body-tags">
 			<a-tag v-for="(i,index) in projectItem.tag" :key="index" :color="tag_colors[Math.ceil(Math.random()*7) - 1]">

@@ -131,6 +131,7 @@
 			this.getProjectOne(this.$route.query.id)
 			this.getProjectList()
 		},
+	
 		methods: {
 			// 根据id获取项目信息
 			getProjectOne(id) {

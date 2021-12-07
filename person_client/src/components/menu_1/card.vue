@@ -31,7 +31,9 @@
 			<div slot="description" class="ant-fonts-description">
 				{{projectItem.detail}}
 			</div>
-			<a-avatar slot="avatar" shape="square" :size="100" :src="projectItem.images[0]" />
+			<!-- <a-avatar slot="avatar" shape="square" :size="100" v-lazy="projectItem.images[0]" :key="projectItem.images[0]"/> -->
+
+			<img class="ant-img" slot="avatar" v-lazy="projectItem.images[0]" />
 		</a-card-meta>
 		<div class="ant-card-body-tags">
 			<a-tag v-for="(i,index) in projectItem.tag" :key="index" :color="tag_colors[Math.ceil(Math.random()*7) - 1]">
@@ -110,6 +112,11 @@
 	    -webkit-box-orient: vertical;
 	    -webkit-line-clamp: 3;
 	    overflow: hidden;
+	}
+	.ant-img{
+		width: 100px;
+		height: 100px;
+		object-fit:cover;
 	}
 	.ant-card-hoverable {
 	    cursor: pointer;

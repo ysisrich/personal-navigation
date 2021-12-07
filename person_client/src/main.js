@@ -2,7 +2,6 @@ import Vue from 'vue'
 import './plugins/axios'
 import App from './App.vue'
 import router from './router'
-import store from './store'
 import './plugins/ant-design-vue.js'
 
 
@@ -35,6 +34,16 @@ Vue.directive('highlight', function (el) {
 import Meta from "vue-meta";
 Vue.use(Meta);
 
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload)
+// 配置项
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  error: '@/asset/img/lazyload.png',
+  loading: '@/asset/img/lazyload.png',
+  attempt: 1
+})
+
 
 Vue.config.productionTip = false
 
@@ -50,6 +59,5 @@ router.beforeEach((to, from, next) => {
 
 new Vue({
   router,
-  store,
   render: h => h(App)
 }).$mount('#app')
