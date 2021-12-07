@@ -124,6 +124,11 @@
 	    -webkit-line-clamp: 3;
 	    overflow: hidden;
 	}
+	.ant-img{
+		width: 100px;
+		height: 100px;
+		object-fit: cover;
+	}
 	.ant-card-hoverable {
 	    cursor: pointer;
 	}
