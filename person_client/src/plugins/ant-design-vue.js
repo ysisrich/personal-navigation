@@ -13,6 +13,7 @@ import {
     Avatar,
     Button,
     Card,
+    Tabs,
     Collapse,
     Checkbox,
     Col,
@@ -62,6 +63,7 @@ Vue.use(Row);
 Vue.use(Select);
 Vue.use(Spin);
 Vue.use(Card);
+Vue.use(Tabs);
 Vue.use(Tag);
 Vue.use(Table);
 Vue.use(Tooltip);

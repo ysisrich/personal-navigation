@@ -57,6 +57,12 @@ router.beforeEach((to, from, next) => {
 })
 
 
+// 引入自己的组件库
+import niubilityUi from 'niubility-ui'
+import 'niubility-ui/dist/niubility-ui.css'
+Vue.use(niubilityUi)
+
+
 new Vue({
   router,
   render: h => h(App)

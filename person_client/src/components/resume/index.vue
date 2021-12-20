@@ -40,12 +40,25 @@
 					<span class="ant-name">{{item.name}}</span>
 					<span>{{item.create_time}}</span>
 					<span class="ant-actions">
-						<span> <a-button type="primary" size="small" @click="downloadFile(item)"> 下载 </a-button> </span>
-						<span> <a-button type="danger" size="small" @click="deleteFile(item)"> 删除 </a-button> </span>
+						<span> <a-button type="primary" size="small" @click="showModel(item,'download')"> 下载 </a-button> </span>
+						<span> <a-button type="danger" size="small" @click="showModel(item,'delete')"> 删除 </a-button> </span>
 					</span>
 				</div>
 			</a-col>
 		</a-row>
+
+		<div>
+			<a-modal
+				title="Title"
+				:visible="visible"
+				@ok="ok"
+				@cancel="()=>{visible = false;downloadSSH = ''}"
+				>
+				<a-input placeholder="输入密码" v-model="downloadSSH"/>
+			</a-modal>
+		</div>
+
+
 	</div>
 </template>
 
@@ -54,11 +67,15 @@ import moment from 'moment'
 export default {
 	data(){
 		return {
+			visible:false,
 			show:false,
 			url: this.config.interfaceUrl + '/resume/uploadResumeFile',
 			resumeList:[],
 			show:false,
-			imgs:['png','jpg','jpeg']
+			imgs:['png','jpg','jpeg'],
+			remuse:'',
+			downloadSSH:'',
+			modelType:''
 		}
 	},
 	mounted() {
@@ -106,14 +123,13 @@ export default {
 		    },
 
 			// 下载文件
-			downloadFile(item){
-				open(this.config.mediaUrl + item.file_url)
+			downloadFile(){
+				open(this.config.mediaUrl + this.remuse.file_url)
 			},
 
 			// 删除文件
-			deleteFile(item){
-				console.log(item)
-				this.axios.post('resume/deleteFile',item)
+			deleteFile(){
+				this.axios.post('resume/deleteFile',this.remuse)
 				.then(res=>{
 					console.log(res)
 					if(res.status == 1){
@@ -123,6 +139,22 @@ export default {
 						this.$message.error(res.info);
 					}
 				})
+			},
+			ok(){
+				if(this.downloadSSH != localStorage.downloadSSH){
+					this.$message.error('密码错误！')
+					this.downloadSSH = ''
+					return false
+				}else{
+					this.modelType == 'download' ? this.downloadFile() :  this.deleteFile()
+				}
+				this.downloadSSH = ''
+				this.visible = false
+			},
+			showModel(item,modelType){
+				this.visible = true
+				this.remuse = item
+				this.modelType = modelType
 			},
 
 			// 图片

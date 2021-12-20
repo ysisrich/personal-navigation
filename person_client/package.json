@@ -17,6 +17,7 @@
     "github-markdown-css": "^4.0.0",
     "highlight.js": "^11.1.0",
     "moment": "^2.29.1",
+    "niubility-ui": "^0.1.1",
     "node-sass": "^6.0.1",
     "v-viewer": "^1.6.3",
     "vditor": "^3.8.6",
